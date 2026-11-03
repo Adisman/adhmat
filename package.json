@@ -1,0 +1,15 @@
+{
+  "name": "adhmat-platform",
+  "version": "1.0.0",
+  "description": "ADHMAT website, dashboard and REDCap ingestion API for local deployment (no external dependencies).",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "mock-redcap": "node scripts/mock-redcap.js",
+    "build:dashboard": "node scripts/build-dashboard.js",
+    "build:site": "node scripts/build-site.js",
+    "test": "node tests/run.js"
+  }
+}

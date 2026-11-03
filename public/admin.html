@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data & pipeline | ADHMAT</title>
+<meta name="description" content="Status and control of the REDCap to dashboard pipeline.">
+<meta name="theme-color" content="#1A5632">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/admin.css"></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="index.html" aria-label="ADHMAT home"><img src="assets/img/africacdc-logo.png" alt="Africa CDC: Centres for Disease Control and Prevention" width="170" height="50">
+    <span class="brand-text"><strong>ADHMAT</strong><span>Digital Health Maturity Assessment</span></span></a>
+  <button class="menu-btn" aria-label="Menu" aria-controls="site-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <nav class="nav" id="site-nav" aria-label="Main"><a href="index.html">Home</a><a href="about.html">About</a><a href="tool.html">The tool</a><a href="roadmap.html">Roadmap</a><a href="dashboard.html">Dashboard</a><a href="admin.html" aria-current="page">Data &amp; pipeline</a><a href="faq.html">FAQ</a><span class="proto" id="liveBadge" title="Data currently shown on the dashboard">Local</span></nav>
+</div></header>
+<main id="main">
+<div class="page-head"><div class="wrap"><div class="eyebrow" style="color:var(--crimson)">Data &amp; pipeline</div><h1>REDCap to dashboard pipeline</h1><p>See what the dashboard is showing, when REDCap was last read, and run or check the pipeline.</p></div></div>
+
+<section class="block"><div class="wrap">
+  <h2 class="section-title">Status</h2>
+  <div class="grid g3" id="statusCards" aria-live="polite"><div class="card"><p>Loading…</p></div></div>
+  <div class="note" id="m2note" hidden style="margin-top:22px"></div>
+</div></section>
+
+<section class="block alt"><div class="wrap">
+  <h2 class="section-title">How the pipeline works</h2>
+  <p class="section-lead">No one maps data columns. The REDCap data dictionary tells the pipeline what every field means.</p>
+  <ol class="flow">
+    <li><b>1. Read the dictionary</b><span>Questions, domains, sub-domains, countries, regions, priority items and level thresholds are derived from the REDCap data dictionary.</span></li>
+    <li><b>2. Export from REDCap</b><span>The REDCap API is called on a schedule, on a Data Entry Trigger and on demand. Only the fields the dashboard needs are requested. Personal contact details and free-text answers are never requested.</span></li>
+    <li><b>3. Score</b><span>Sub-domain, domain and overall scores and maturity levels are recalculated using ADHMAT V2.5 rules and checked against the scores REDCap calculated.</span></li>
+    <li><b>4. Store a snapshot</b><span>Each change is saved as a snapshot, so a previous state can be restored. If a sync fails, the last good data stays on the dashboard.</span></li>
+    <li><b>5. Refresh the dashboard</b><span>Open dashboards are told about new data and redraw by themselves.</span></li>
+  </ol>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2 class="section-title">Administration</h2>
+  <p class="section-lead">Enter the admin key to run a sync, upload a file or change settings. The key is shown once in the server console on first start and kept in <code>data/admin.key</code>. It stays in this browser tab only.</p>
+  <form class="keyform" id="keyForm" autocomplete="off"><label for="adminKey">Admin key</label><input id="adminKey" type="password" autocomplete="off" spellcheck="false"><button class="btn btn-solid" type="submit">Unlock</button><span id="keyMsg" role="status"></span></form>
+
+  <div id="adminArea" hidden>
+    <div class="grid g2">
+      <div class="card"><h3>Sync with REDCap</h3><p>Read the REDCap project now and publish the result to the dashboard.</p>
+        <div class="btnrow"><button class="btn btn-solid" id="syncNow">Sync now</button><button class="btn btn-outline" id="testConn">Test REDCap connection</button></div><pre class="out" id="syncOut" hidden></pre></div>
+      <div class="card"><h3>Upload a REDCap export</h3><p>Use <b>CSV / Microsoft Excel (raw data)</b> from REDCap, for the ADHMAT form. The file is checked first and nothing is stored until you confirm.</p>
+        <input type="file" id="upFile" accept=".csv,.json,text/csv"><div class="btnrow"><button class="btn btn-outline" id="upCheck" disabled>Check file</button><button class="btn btn-solid" id="upImport" disabled>Import</button><a class="btn btn-ghost" href="/api/test/redcap-export.csv">Download a test export</a></div><div class="out" id="upOut" hidden></div></div>
+    </div>
+    <div class="grid g2" style="margin-top:22px">
+      <div class="card"><h3>Data shown by default</h3><p>What the dashboard opens with. Visitors can still switch between Live and Test data.</p>
+        <div class="radios" id="srcRadios"><label><input type="radio" name="src" value="auto"> Automatic: live when it exists, otherwise test</label><label><input type="radio" name="src" value="live"> Live data only</label><label><input type="radio" name="src" value="test"> Test data</label></div><span id="srcMsg" role="status"></span></div>
+      <div class="card"><h3>REDCap Data Entry Trigger</h3><p>In REDCap: Project Setup, Additional customizations, Data Entry Trigger. Paste this address so the dashboard updates soon after a form is saved.</p>
+        <input class="mono" id="hookUrl" readonly><div class="btnrow"><button class="btn btn-outline" id="copyHook">Copy</button></div>
+        <p class="small" id="cfgInfo"></p></div>
+    </div>
+
+    <h3 class="sub-h">Snapshots</h3>
+    <div class="tablewrap"><table class="tbl" id="snapTbl"><thead><tr><th>Saved</th><th>Source</th><th>Records</th><th>ADHMAT complete</th><th>Both modules</th><th></th></tr></thead><tbody></tbody></table></div>
+
+    <h3 class="sub-h">Sync history</h3>
+    <div class="tablewrap"><table class="tbl" id="histTbl"><thead><tr><th>Time</th><th>What</th><th>Result</th><th>Details</th></tr></thead><tbody></tbody></table></div>
+
+    <h3 class="sub-h">Data dictionary</h3>
+    <div class="grid g2"><div class="card"><div id="dictInfo"></div></div>
+      <div class="card"><h3>Use a newer dictionary</h3><p>Download the dictionary from REDCap (Project Setup, Data Dictionary) and upload it here. It is checked and compared with the current one before you adopt it. With REDCap connected, the pipeline also keeps itself up to date.</p>
+        <input type="file" id="dictFile" accept=".csv,text/csv"><div class="btnrow"><button class="btn btn-outline" id="dictCheck" disabled>Check</button><button class="btn btn-solid" id="dictUse" disabled>Use this dictionary</button></div><div class="out" id="dictOut" hidden></div></div></div>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="foot-logo"><img src="assets/img/africacdc-logo.png" alt="Africa CDC" width="150" height="44"></span>
+      <p class="tagline">Safeguarding Africa&rsquo;s Health</p>
+      <p>The Africa Digital Health Maturity Assessment Tool (ADHMAT) is an initiative of the Africa Centres for Disease Control and Prevention, Digital Health and Information System Division.</p></div>
+    <div><h4>Explore</h4><ul><li><a href="about.html">About ADHMAT</a></li><li><a href="tool.html">The tool and its levels</a></li><li><a href="roadmap.html">Roadmap to the Report</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="admin.html">Data &amp; pipeline</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div><h4>Data</h4><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="admin.html">Data &amp; pipeline</a></li><li><a href="dashboard/?source=test">Dashboard with test data</a></li></ul></div>
+  </div>
+  <div class="legal" id="footStatus">Local deployment of the ADHMAT website and dashboard. It is not the official Africa CDC website. Test data is generated and is not a real assessment result. Africa CDC name and logo are used with the Africa CDC master template.</div>
+</div></footer>
+<script src="assets/js/site.js"></script><script src="assets/js/status.js"></script><script src="assets/js/admin.js"></script>
+</body></html>

@@ -1,0 +1,22 @@
+{
+  "server": { "host": "127.0.0.1", "port": 8080 },
+  "redcap": {
+    "url": "",
+    "projectId": "",
+    "filterLogic": "",
+    "batchSize": 100,
+    "timeoutMs": 60000,
+    "retries": 3
+  },
+  "sync": {
+    "enabled": true,
+    "onStart": true,
+    "intervalMinutes": 60,
+    "atTimes": [],
+    "webhookDebounceSeconds": 20,
+    "refreshDictionaryFromRedcap": true
+  },
+  "storage": { "dir": "data", "keepSnapshots": 40 },
+  "dictionary": { "path": "dictionary/AfricaDigitalHealthMaturityAss_DataDictionary_2026-11-03.csv" },
+  "client": { "pollSeconds": 60, "defaultSource": "auto" }
+}

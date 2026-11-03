@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The tool | ADHMAT</title>
+<meta name="description" content="ADHMAT domains, sub-domains, maturity levels and how results are read.">
+<meta name="theme-color" content="#1A5632">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="index.html" aria-label="ADHMAT home"><img src="assets/img/africacdc-logo.png" alt="Africa CDC: Centres for Disease Control and Prevention" width="170" height="50">
+    <span class="brand-text"><strong>ADHMAT</strong><span>Digital Health Maturity Assessment</span></span></a>
+  <button class="menu-btn" aria-label="Menu" aria-controls="site-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <nav class="nav" id="site-nav" aria-label="Main"><a href="index.html">Home</a><a href="about.html">About</a><a href="tool.html" aria-current="page">The tool</a><a href="roadmap.html">Roadmap</a><a href="dashboard.html">Dashboard</a><a href="admin.html">Data &amp; pipeline</a><a href="faq.html">FAQ</a><span class="proto" id="liveBadge" title="Data currently shown on the dashboard">Local</span></nav>
+</div></header>
+<main id="main">
+<div class="page-head"><div class="wrap"><div class="eyebrow" style="color:var(--crimson)">The tool</div><h1>How ADHMAT works</h1><p>Five domains, seven sub-domains, five maturity levels, and a results view designed to show strengths and gaps.</p></div></div>
+<section class="block"><div class="wrap">
+  <h2 class="section-title">Five domains</h2>
+  <p class="section-lead">The National tool has 373 questions. Digital Payment Systems is a supplementary module and sits alongside the five domains.</p>
+  <div class="grid g3"><div class="card domain"><div class="letter">A</div><div><h3>Digital Environment</h3></div></div><div class="card domain"><div class="letter">B</div><div><h3>Architecture &amp; Data</h3></div></div><div class="card domain"><div class="letter">C</div><div><h3>Applications</h3></div></div><div class="card domain"><div class="letter">D</div><div><h3>Analytics</h3></div></div><div class="card domain"><div class="letter">E</div><div><h3>AI &amp; Emerging Technology</h3></div></div><div class="card domain"><div class="letter" style="background:var(--gold);color:#1B2420;font-size:20px">DPS</div><div><h3>Digital Payment Systems</h3><p>Supplementary module</p></div></div></div>
+  <h3 style="margin:40px 0 14px;color:var(--green)">Seven sub-domains are scored within the domains</h3>
+  <div class="chips"><span class="chip">Leadership &amp; Governance</span><span class="chip">Strategy &amp; Investment</span><span class="chip">Legislation &amp; Policy</span><span class="chip">Workforce</span><span class="chip">Standards &amp; Interoperability</span><span class="chip">Infrastructure</span><span class="chip">Services &amp; Applications</span></div>
+</div></section>
+
+<section class="block alt"><div class="wrap">
+  <h2 class="section-title">How an assessment is completed</h2>
+  <p class="section-lead">The documented flow for a national assessment.</p>
+  <ol class="steps">
+    <li><h3>Collect answers and evidence</h3><p>Answer each question Yes, No or N/A. For each Yes, record the evidence source, date and verification status.</p></li>
+    <li><h3>Calculate sub-domain scores</h3><p>A % score is calculated for each of the seven sub-domains.</p></li>
+    <li><h3>Convert to a maturity level</h3><p>Each % score maps to one of five levels.</p></li>
+    <li><h3>Read the domain profile</h3><p>The average of the applicable sub-domains gives each domain score. This profile is the headline result.</p></li>
+    <li><h3>Report completeness</h3><p>Maturity is always shown together with how much of the tool was answered.</p></li>
+  </ol>
+  <p style="margin-top:20px;color:var(--muted)">The overall score is the average of the five domain scores. It is a secondary summary and is not intended for ranking countries.</p>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2 class="section-title">Try the level bands</h2>
+  <p class="section-lead">Move the slider to see how a % score maps to a maturity level.</p>
+  <div class="calc">
+    <div><label for="pct-range">Domain score</label><div class="pct" id="pct-val" aria-live="polite">55%</div><input id="pct-range" type="range" min="0" max="100" value="55" step="1" aria-label="Domain score in percent"></div>
+    <div id="calc-out" class="calc-out lv3"><small>L3 &middot; LEVEL</small><strong>Established</strong><p style="margin:0">Meeting minimum standards, consolidation needed.</p></div>
+  </div>
+  <div class="levels" style="margin-top:36px">
+    <div class="level lv1"><small>L1</small><strong>Nascent</strong><span>below 40%</span></div>
+    <div class="level lv2"><small>L2</small><strong>Emerging</strong><span>40&ndash;54%</span></div>
+    <div class="level lv3"><small>L3</small><strong>Established</strong><span>55&ndash;69%</span></div>
+    <div class="level lv4"><small>L4</small><strong>Advanced</strong><span>70&ndash;84%</span></div>
+    <div class="level lv5"><small>L5</small><strong>Optimized</strong><span>85% and above</span></div>
+  </div>
+</div></section>
+
+<section class="block alt"><div class="wrap">
+  <h2 class="section-title">Reading results</h2>
+  <div class="grid g3">
+    <div class="card"><span class="ico "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><h3>Domain profile first</h3><p>The shape across domains A to E is the headline, so strengths and gaps stay visible.</p></div>
+    <div class="card"><span class="ico crim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span><h3>Overall score is secondary</h3><p>It summarises the five domains and should not be used to rank countries.</p></div>
+    <div class="card"><span class="ico "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><h3>Completeness is reported</h3><p>A score is read together with how much of the tool was answered.</p></div>
+  </div>
+  <div class="note" style="margin-top:28px"><strong>Current tool version.</strong> The latest ADHMAT workbooks are version 2.5 (October 2026). The assessment workbooks are shared with national focal points by Africa CDC and are not hosted on this site.</div>
+</div></section>
+
+</main>
+<footer class="site-footer"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="foot-logo"><img src="assets/img/africacdc-logo.png" alt="Africa CDC" width="150" height="44"></span>
+      <p class="tagline">Safeguarding Africa&rsquo;s Health</p>
+      <p>The Africa Digital Health Maturity Assessment Tool (ADHMAT) is an initiative of the Africa Centres for Disease Control and Prevention, Digital Health and Information System Division.</p></div>
+    <div><h4>Explore</h4><ul><li><a href="about.html">About ADHMAT</a></li><li><a href="tool.html">The tool and its levels</a></li><li><a href="roadmap.html">Roadmap to the Report</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="admin.html">Data &amp; pipeline</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div><h4>Data</h4><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="admin.html">Data &amp; pipeline</a></li><li><a href="dashboard/?source=test">Dashboard with test data</a></li></ul></div>
+  </div>
+  <div class="legal" id="footStatus">Local deployment of the ADHMAT website and dashboard. It is not the official Africa CDC website. Test data is generated and is not a real assessment result. Africa CDC name and logo are used with the Africa CDC master template.</div>
+</div></footer>
+<script src="assets/js/site.js"></script><script src="assets/js/status.js"></script>
+</body></html>
