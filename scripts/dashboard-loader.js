@@ -70,9 +70,13 @@
     return fetch('/api/data?source=' + want, { cache: 'no-cache' }).then(function (r) {
       if (r.status === 404 && want === 'live') { src.fallback = true; liveAvailable = false; return fetch('/api/data?source=test', { cache: 'no-cache' }); }
       return r;
+    }).catch(function () { return { ok: false, status: 0 }; }).then(function (r) {
+      /* Static copy (GitHub Pages) has no server: use the bundled test data. */
+      if (!r.ok) { src.fallback = want === 'live'; liveAvailable = false; return fetch(new URL('../data/test-data.json', location.href).href, { cache: 'no-cache' }); }
+      return r;
     }).then(function (r) {
-      if (!r.ok) throw new Error('the server answered ' + r.status);
-      var et = r.headers.get('etag') + (src.fallback ? '#f' : '');
+      if (!r.ok) throw new Error('the data answered ' + r.status);
+      var et = (r.headers.get('etag') || r.headers.get('last-modified') || 'static') + (src.fallback ? '#f' : '');
       if (loaded && et === lastEtag) return null;
       lastEtag = et; return r.json();
     }).then(function (p) { if (p) apply(p); conn(true); }).catch(function (e) { if (!loaded) fail(e.message); else conn(false); });
